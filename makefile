@@ -1,21 +1,36 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: tdumouli <marvin@42.fr>                    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2016/11/08 16:51:40 by tdumouli          #+#    #+#              #
+#    Updated: 2016/11/10 23:32:43 by tdumouli         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
-NAME = a.out
+NAME = libft.a
 CC = gcc
-CFLAG = -I. -Wall -Werror -Wextra
+CFLAGS = -I. -Wall -Werror -Wextra
 
-SRC = ft_memset.c ft_bzero.c ft_memcpy.c ft_memccpy.c ft_memmove.c \
-	ft_memchr.c ft_memcmp.c ft_strlen.c ft_strdup.c ft_strcpy.c  
+SRCS = memset bzero memcpy memccpy memmove memchr memcmp strlen strdup strcpy \
+	   strncpy strcat strncat strlcat strchr strrchr strstr strnstr strcmp \
+	   strncmp atoi isalpha isdigit isalnum isascii isprint toupper tolower \
+	   memalloc memdel strnew strdel strclr striter striteri strmap strmapi \
+	   strequ strnequ strsub strjoin strtrim strsplit itoa putchar putstr \
+	   putendl putnbr putchar_fd putstr_fd putendl_fd putnbr_fd isspace \
+	   lstadd lstnew lstdel lstdelone lstiter lstmap
 
-OBJ = $(SRC:.c = .o)
+SRC = $(addsuffix .c, $(addprefix ft_, $(SRCS))) 
 
-all: 2
-	./$(NAME)
+OBJ = $(SRC:.c=.o)
 
-1: $(OBJ) test.c
-	$(CC) -o $(NAME) test.c $(OBJ) $(CFLAG)
+all: $(NAME)
 
-2: $(OBJ) test2.c
-	$(CC) -o $(NAME) test2.c $(OBJ) $(CFLAG)
+$(NAME): $(OBJ)
+	@ar r $(NAME) $(OBJ)
+	@ranlib $(NAME)
 
 clean:
 	rm -rf *.o
@@ -25,4 +40,4 @@ fclean: clean
 
 re: fclean all
 
-.phony: all clean fclean re
+.PHONY: all clean fclean re
