@@ -12,11 +12,5 @@ pipeline {
       }
     }
 
-    stage('ibelive') {
-      steps {
-        mail(subject: '???', body: 'lk', to: 'tdumoulin@cap3c.net')
-      }
-    }
-
   }
 }
